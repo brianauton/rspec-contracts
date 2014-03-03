@@ -7,7 +7,7 @@ module RSpec
 
       def initialize(contract_name, *args)
         @contract_name = contract_name
-        __initialize_as_test_double "contract #{contract_name.inspect}", *args
+        __initialize_as_test_double contract_name, *args
       end
 
       def __build_mock_proxy(order_group)
