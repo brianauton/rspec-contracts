@@ -10,22 +10,22 @@ module RSpec
       end
 
       def add_stub(location, method_name, opts={}, &implementation)
-        create_requirement method_name, opts
+        create_requirement method_name
         super
       end
 
       def add_simple_stub(method_name, *args)
-        create_requirement method_name, [], args.first
+        create_requirement method_name, :return_value => args.first
         super
       end
 
       def add_message_expectation(location, method_name, opts={}, &block)
-        create_requirement method_name, opts, nil
+        create_requirement method_name
         super
       end
 
-      def create_requirement(method_name, arguments, return_value)
-        Requirement.create @contract_name, method_name, arguments, return_value
+      def create_requirement(method_name, options = {})
+        Requirement.create @contract_name, method_name, options
       end
     end
   end
