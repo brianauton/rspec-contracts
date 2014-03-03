@@ -1,9 +1,10 @@
 require "rspec/mocks/test_double"
+require "rspec/contracts/contract_proxy"
 
 module RSpec
-  module Mocks
-    class ContractDouble
-      include TestDouble
+  module Contracts
+    class Double
+      include Mocks::TestDouble
 
       def initialize(contract_name, *args)
         @contract_name = contract_name
@@ -11,7 +12,7 @@ module RSpec
       end
 
       def __build_mock_proxy(order_group)
-        ContractProxy.new self, order_group, @contract_name
+        Mocks::ContractProxy.new self, order_group, @contract_name
       end
     end
   end
