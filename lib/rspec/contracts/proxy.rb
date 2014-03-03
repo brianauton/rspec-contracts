@@ -1,4 +1,5 @@
 require "rspec/mocks/proxy"
+require "rspec/contracts/requirement"
 
 module RSpec
   module Contracts
@@ -9,24 +10,22 @@ module RSpec
       end
 
       def add_stub(location, method_name, opts={}, &implementation)
-        contract_message method_name, opts
+        create_requirement method_name, opts
         super
       end
 
       def add_simple_stub(method_name, *args)
-        contract_message method_name, [], args.first
+        create_requirement method_name, [], args.first
         super
       end
 
       def add_message_expectation(location, method_name, opts={}, &block)
-        contract_message method_name, opts, nil
+        create_requirement method_name, opts, nil
         super
       end
 
-      def contract_message(method_name, args, return_value)
-        arg_string = args.any? ? "()" : ""
-        return_string = return_value ? "and return #{return_value.inspect}" : ""
-        puts "Interface '#{@contract_name}' must respond to '#{method_name}#{arg_string}' #{return_string}"
+      def create_requirement(method_name, arguments, return_value)
+        Requirement.create @contract_name, method_name, arguments, return_value
       end
     end
   end
