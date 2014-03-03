@@ -1,1 +1,1 @@
-require "rspec/contracts/example_methods"
+require "rspec/contracts/mocks_syntax"
