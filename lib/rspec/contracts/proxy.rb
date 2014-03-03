@@ -1,8 +1,8 @@
 require "rspec/mocks/proxy"
 
 module RSpec
-  module Mocks
-    class ContractProxy < Proxy
+  module Contracts
+    class Proxy < Mocks::Proxy
       def initialize(object, order_group, contract_name)
         @contract_name = contract_name
         super(object, order_group)
