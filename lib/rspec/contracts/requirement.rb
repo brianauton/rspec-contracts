@@ -20,6 +20,12 @@ module RSpec
       def self.create(*args)
         group.add new(*args)
       end
+
+      def matches?(requirement)
+        [:interface_name, :method_name, :arguments, :return_value].select do |attribute|
+          requirement.send(attribute) != send(attribute)
+        end.empty?
+      end
     end
   end
 end

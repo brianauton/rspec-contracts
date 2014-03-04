@@ -7,8 +7,12 @@ module RSpec
         @requirements = []
       end
 
+      def exists?(requirement)
+        @requirements.any?{|r| r.matches? requirement}
+      end
+
       def add(requirement)
-        requirements << requirement
+        requirements << requirement unless exists? requirement
       end
     end
   end
