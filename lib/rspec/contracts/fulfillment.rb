@@ -4,14 +4,20 @@ require "rspec/contracts/requirement_view"
 module RSpec
   module Contracts
     class Fulfillment
-      def self.summary
-        requirement_group.requirements.map do |requirement|
-          RSpec::Contracts::RequirementView.new(requirement).render
-        end.join "\n"
+      def initialize(requirement_group)
+        @requirement_group = requirement_group
       end
 
-      def self.requirement_group
-        RSpec::Contracts::Requirement.group
+      def complete?
+        false
+      end
+
+      def unfulfilled_requirements
+        @requirement_group.requirements
+      end
+
+      def requirements_count
+        @requirement_group.requirements.count
       end
     end
   end
