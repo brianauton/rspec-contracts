@@ -6,13 +6,13 @@ module RSpec
     class Double
       include Mocks::TestDouble
 
-      def initialize(contract_name, *args)
-        @contract_name = contract_name
-        __initialize_as_test_double contract_name, *args
+      def initialize(interface_name, *args)
+        @interface_name = interface_name
+        __initialize_as_test_double interface_name, *args
       end
 
       def __build_mock_proxy(order_group)
-        Proxy.new self, order_group, @contract_name
+        Proxy.new self, order_group, @interface_name
       end
     end
   end

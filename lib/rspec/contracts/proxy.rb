@@ -4,8 +4,8 @@ require "rspec/contracts/requirement"
 module RSpec
   module Contracts
     class Proxy < Mocks::Proxy
-      def initialize(object, order_group, contract_name)
-        @contract_name = contract_name
+      def initialize(object, order_group, interface_name)
+        @interface_name = interface_name
         super(object, order_group)
       end
 
@@ -25,7 +25,7 @@ module RSpec
       end
 
       def create_requirement(method_name, options = {})
-        Requirement.create @contract_name, method_name, options
+        Requirement.create @interface_name, method_name, options
       end
     end
   end
