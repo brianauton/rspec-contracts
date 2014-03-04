@@ -1,3 +1,4 @@
+require "rspec/contracts/requirement_group"
 require "rspec/contracts/requirement_view"
 
 module RSpec
@@ -12,9 +13,12 @@ module RSpec
         @return_value = options[:return_value]
       end
 
+      def self.group
+        @group ||= RequirementGroup.new
+      end
+
       def self.create(*args)
-        requirement = new(*args)
-        puts RequirementView.new(requirement).render
+        group.add new(*args)
       end
     end
   end
