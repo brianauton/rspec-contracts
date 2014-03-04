@@ -1,3 +1,4 @@
+require "rspec/contracts/core_syntax"
 require "rspec/contracts/mocks_syntax"
 require "rspec/contracts/fulfillment"
 require "rspec/contracts/fulfillment_view"
