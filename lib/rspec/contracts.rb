@@ -7,9 +7,9 @@ require "rspec/core"
 
 RSpec.configure do |c|
   c.after(:suite) do
-    requirement_group = RSpec::Contracts::Interface.requirements
-    implementation_group = RSpec::Contracts::Interface.implementations
-    fulfillment = RSpec::Contracts::Fulfillment.new requirement_group, implementation_group
+    requirements = RSpec::Contracts::Interface.requirements
+    implementations = RSpec::Contracts::Interface.implementations
+    fulfillment = RSpec::Contracts::Fulfillment.new requirements, implementations
     print "\n" + RSpec::Contracts::FulfillmentView.new(fulfillment).render
   end
 end

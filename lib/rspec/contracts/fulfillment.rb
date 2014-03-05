@@ -11,17 +11,17 @@ module RSpec
       end
 
       def unfulfilled_requirements
-        @requirement_group.requirements.reject { |requirement| fulfilled? requirement }
+        @requirement_group.interactions.reject { |requirement| fulfilled? requirement }
       end
 
       def fulfilled?(requirement)
-        @implementation_group.implementations.any? do |implementation|
+        @implementation_group.interactions.any? do |implementation|
           requirement.implemented_by? implementation
         end
       end
 
       def requirements_count
-        @requirement_group.requirements.count
+        @requirement_group.interactions.count
       end
     end
   end

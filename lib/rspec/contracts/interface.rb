@@ -1,11 +1,10 @@
-require "rspec/contracts/implementation_group"
-require "rspec/contracts/requirement_group"
+require "rspec/contracts/interaction_group"
 
 module RSpec
   module Contracts
     class Interface
       def self.implementations
-        @implementations ||= ImplementationGroup.new
+        @implementations ||= InteractionGroup.new
       end
 
       def self.add_implementation(interaction)
@@ -13,7 +12,7 @@ module RSpec
       end
 
       def self.requirements
-        @requrements ||= RequirementGroup.new
+        @requrements ||= InteractionGroup.new
       end
 
       def self.add_requirement(interaction)
