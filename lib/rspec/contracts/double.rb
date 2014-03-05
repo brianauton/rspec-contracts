@@ -1,5 +1,5 @@
 require "rspec/mocks"
-require "rspec/contracts/proxy"
+require "rspec/contracts/mock_proxy"
 
 module RSpec
   module Contracts
@@ -12,7 +12,7 @@ module RSpec
       end
 
       def __build_mock_proxy(order_group)
-        Proxy.new self, order_group, @interface_name
+        MockProxy.new self, order_group, @interface_name
       end
     end
   end
