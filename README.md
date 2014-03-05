@@ -18,3 +18,12 @@ Install the rspec-contracts gem alongside rspec in your gemfile.
 Then update your bundle.
 
     $ bundle
+
+Define doubles using `contract_double`, providing the contract name as
+the first argument.
+
+    user = contract_double(:user, email: "me@example.com")
+
+Running the specs will then show a summary of unverified contracts.
+
+    $ rspec
