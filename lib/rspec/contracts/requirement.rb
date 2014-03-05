@@ -1,5 +1,3 @@
-require "rspec/contracts/requirement_group"
-
 module RSpec
   module Contracts
     class Requirement
@@ -10,14 +8,6 @@ module RSpec
         @method_name = method_name
         @arguments = options[:arguments] || []
         @return_value = options[:return_value]
-      end
-
-      def self.group
-        @group ||= RequirementGroup.new
-      end
-
-      def self.create(*args)
-        group.add new(*args)
       end
 
       def matches?(requirement)

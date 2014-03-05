@@ -1,5 +1,3 @@
-require "rspec/contracts/implementation_group"
-
 module RSpec
   module Contracts
     class Implementation
@@ -9,14 +7,6 @@ module RSpec
         @interface_name = interface_name
         @method_name = method_name
         @arguments = options[:arguments]
-      end
-
-      def self.group
-        @group ||= ImplementationGroup.new
-      end
-
-      def self.create(*args)
-        group.add new(*args)
       end
 
       def matches?(requirement)
