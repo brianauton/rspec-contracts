@@ -1,6 +1,6 @@
 require "rspec/mocks"
+require "rspec/contracts/interaction"
 require "rspec/contracts/interface"
-require "rspec/contracts/requirement"
 
 module RSpec
   module Contracts
@@ -26,7 +26,7 @@ module RSpec
       end
 
       def create_requirement(method_name, options = {})
-        requirement = Requirement.new @interface_name, method_name, options
+        requirement = Interaction.new @interface_name, method_name, options
         Interface.add_requirement requirement
       end
     end

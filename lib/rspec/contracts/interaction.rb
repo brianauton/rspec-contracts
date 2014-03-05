@@ -1,6 +1,6 @@
 module RSpec
   module Contracts
-    class Requirement
+    class Interaction
       attr_reader :interface_name, :method_name, :arguments, :return_value
 
       def initialize(interface_name, method_name, options = {})

@@ -1,5 +1,5 @@
 require "rspec/contracts/interface"
-require "rspec/contracts/implementation"
+require "rspec/contracts/interaction"
 
 module RSpec
   module Contracts
@@ -9,7 +9,7 @@ module RSpec
       end
 
       def create_interface(options)
-        implementation = Implementation.new @interface_name, @method_name, options
+        implementation = Interaction.new @interface_name, @method_name, options
         Interface.add_implementation implementation
       end
 
