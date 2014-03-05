@@ -7,12 +7,12 @@ module RSpec
         @implementations = []
       end
 
-      def exists?(implementation)
-        @implementations.any?{|r| r.matches? implementation}
+      def exists?(interaction)
+        @implementations.any?{|r| r.matches? interaction}
       end
 
-      def add(implementation)
-        implementations << implementation unless exists? implementation
+      def add(interaction)
+        implementations << interaction unless exists? interaction
       end
     end
   end

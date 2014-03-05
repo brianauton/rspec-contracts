@@ -7,12 +7,12 @@ module RSpec
         @requirements = []
       end
 
-      def exists?(requirement)
-        @requirements.any?{|r| r.matches? requirement}
+      def exists?(interaction)
+        @requirements.any?{|r| r.matches? interaction}
       end
 
-      def add(requirement)
-        requirements << requirement unless exists? requirement
+      def add(interaction)
+        requirements << interaction unless exists? interaction
       end
     end
   end

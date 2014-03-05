@@ -10,15 +10,15 @@ module RSpec
         @return_value = options[:return_value]
       end
 
-      def matches?(requirement)
+      def matches?(interaction)
         [:interface_name, :method_name, :arguments, :return_value].select do |attribute|
-          requirement.send(attribute) != send(attribute)
+          interaction.send(attribute) != send(attribute)
         end.empty?
       end
 
-      def implemented_by?(implementation)
+      def implemented_by?(interaction)
         [:interface_name, :method_name, :arguments].select do |attribute|
-          implementation.send(attribute) != send(attribute)
+          interaction.send(attribute) != send(attribute)
         end.empty?
       end
     end

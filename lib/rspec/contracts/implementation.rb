@@ -9,9 +9,9 @@ module RSpec
         @arguments = options[:arguments]
       end
 
-      def matches?(requirement)
+      def matches?(interaction)
         [:interface_name, :method_name, :arguments].select do |attribute|
-          requirement.send(attribute) != send(attribute)
+          interaction.send(attribute) != send(attribute)
         end.empty?
       end
     end

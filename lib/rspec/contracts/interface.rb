@@ -8,16 +8,16 @@ module RSpec
         @implementations ||= ImplementationGroup.new
       end
 
-      def self.add_implementation(implementation)
-        implementations.add implementation
+      def self.add_implementation(interaction)
+        implementations.add interaction
       end
 
       def self.requirements
         @requrements ||= RequirementGroup.new
       end
 
-      def self.add_requirement(requirement)
-        requirements.add requirement
+      def self.add_requirement(interaction)
+        requirements.add interaction
       end
     end
   end
