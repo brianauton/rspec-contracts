@@ -15,7 +15,9 @@ module RSpec
       end
 
       def fulfilled?(requirement)
-        false
+        @implementation_group.implementations.any? do |implementation|
+          requirement.implemented_by? implementation
+        end
       end
 
       def requirements_count
