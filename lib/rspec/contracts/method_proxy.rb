@@ -1,8 +1,14 @@
+require "rspec/contracts/implementation"
+
 module RSpec
   module Contracts
     class MethodProxy
       def self.create(*args)
         new(*args)
+      end
+
+      def create_interface(options)
+        Implementation.create @interface_name, @method_name, options
       end
 
       private
@@ -16,7 +22,9 @@ module RSpec
 
       def install
         original_method = @proxied_class.instance_method @method_name
+        method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
+          method_proxy.create_interface :arguments => args
           original_method.bind(self).call(*args)
         end
       end
