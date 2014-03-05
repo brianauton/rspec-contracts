@@ -1,6 +1,6 @@
-## Conjure
+## rspec-contracts
 
-Automatic contract checking for your RSpec suite
+Automatic contract verification for your RSpec suite
 
 ### Requirements
 
