@@ -1,4 +1,4 @@
-### Version 0.0.0
-2014-2-24
+### Version 0.0.1
+2014-3-4
 
-* Not yet released
+* Show summary of unverified contracts after specs run
