@@ -1,3 +1,5 @@
+require "rspec/contracts/requirement_view"
+
 module RSpec
   module Contracts
     class FulfillmentView

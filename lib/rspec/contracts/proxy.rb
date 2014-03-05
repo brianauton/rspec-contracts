@@ -1,4 +1,4 @@
-require "rspec/mocks/proxy"
+require "rspec/mocks"
 require "rspec/contracts/requirement"
 
 module RSpec

@@ -1,3 +1,4 @@
+require "rspec/mocks"
 require "rspec/contracts/double"
 
 module RSpec

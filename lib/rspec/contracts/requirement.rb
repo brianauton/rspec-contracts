@@ -1,5 +1,4 @@
 require "rspec/contracts/requirement_group"
-require "rspec/contracts/requirement_view"
 
 module RSpec
   module Contracts
