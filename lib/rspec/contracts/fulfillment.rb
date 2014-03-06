@@ -1,9 +1,7 @@
 module RSpec
   module Contracts
     class Fulfillment
-      def initialize(requirement_group, implementation_group, interfaces)
-        @requirement_group = requirement_group
-        @implementation_group = implementation_group
+      def initialize(interfaces)
         @interfaces = interfaces
       end
 
@@ -16,11 +14,15 @@ module RSpec
       end
 
       def complete_interface?(interface)
-        interface.requirements.all? { |r| fulfilled? r, interface.implementations }
+        unfulfilled_requirements_for(interface).empty?
+      end
+
+      def unfulfilled_requirements_for(interface)
+        interface.requirements.reject { |r| fulfilled? r, interface.implementations }
       end
 
       def unfulfilled_requirements
-        @requirement_group.interactions.reject { |requirement| fulfilled? requirement, @implementation_group.interactions }
+        @interfaces.map{ |i| unfulfilled_requirements_for i }.flatten
       end
 
       def fulfilled?(requirement, implementations)
@@ -29,7 +31,7 @@ module RSpec
       end
 
       def requirements_count
-        @requirement_group.interactions.count
+        @interfaces.map{ |i| i.requirements.count }.inject(&:+)
       end
     end
   end
