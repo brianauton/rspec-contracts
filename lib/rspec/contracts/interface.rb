@@ -4,34 +4,20 @@ require "rspec/contracts/interaction_group"
 module RSpec
   module Contracts
     class Interface
-      attr_reader :name
+      attr_reader :name, :requirements, :implementations
 
       def initialize(name)
         @name = name
-      end
-
-      def requirements
-        Interface.requirements.select { |i| i.interface_name == name }
-      end
-
-      def implementations
-        Interface.implementations.select { |i| i.interface_name == name }
+        @requirements = InteractionGroup.new
+        @implementations = InteractionGroup.new
       end
 
       def add_requirement(method_name, options = {})
-        Interface.requirements.add Interaction.new(name, method_name, options)
+        @requirements.add Interaction.new(name, method_name, options)
       end
 
       def add_implementation(method_name, options = {})
-        Interface.implementations.add Interaction.new(name, method_name, options)
-      end
-
-      def self.implementations
-        @implementations ||= InteractionGroup.new
-      end
-
-      def self.requirements
-        @requrements ||= InteractionGroup.new
+        @implementations.add Interaction.new(name, method_name, options)
       end
 
       def self.all
