@@ -6,7 +6,7 @@ module RSpec
       end
 
       def render
-        arg_string = @requirement.arguments ? "()" : ""
+        arg_string = @requirement.specifications[:arguments] ? "()" : ""
         return_string = @requirement.return_value ? "and return #{@requirement.return_value.inspect}" : ""
         "Interface '#{@requirement.interface_name}' must respond to '#{@requirement.method_name}#{arg_string}' #{return_string}"
       end
