@@ -1,8 +1,12 @@
+require "rspec/contracts/interface_fulfillment"
+
 module RSpec
   module Contracts
     class Fulfillment
+      attr_reader :interface_fulfillments
+
       def initialize(interfaces)
-        @interfaces = interfaces
+        @interface_fulfillments = interfaces.map{ |i| InterfaceFulfillment.new i }
       end
 
       def complete?
@@ -10,28 +14,15 @@ module RSpec
       end
 
       def incomplete_interfaces
-        @interfaces.reject { |i| complete_interface? i }
-      end
-
-      def complete_interface?(interface)
-        unfulfilled_requirements_for(interface).empty?
-      end
-
-      def unfulfilled_requirements_for(interface)
-        interface.requirements.reject { |r| fulfilled? r, interface.implementations }
+        interface_fulfillments.reject(&:complete?)
       end
 
       def unfulfilled_requirements
-        @interfaces.map{ |i| unfulfilled_requirements_for i }.flatten
-      end
-
-      def fulfilled?(requirement, implementations)
-        result = implementations.any? { |i| requirement.fully_described_by? i }
-        result
+        interface_fulfillments.map(&:unfulfilled_requirements).flatten
       end
 
       def requirements_count
-        @interfaces.map{ |i| i.requirements.count }.inject(&:+)
+        interface_fulfillments.map(&:requirements_count).inject(&:+)
       end
     end
   end
