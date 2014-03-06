@@ -7,7 +7,8 @@ module RSpec
     class ExampleGroup
       def self.fulfill_contract(*interface_names)
         interface_names.each do |name|
-          Contracts::InterfaceProxy.create Contracts::Interface.new(name), described_class
+          interface = Contracts::Interface.find_or_create name
+          Contracts::InterfaceProxy.create interface, described_class
         end
       end
     end

@@ -25,6 +25,14 @@ module RSpec
       def self.requirements
         @requrements ||= InteractionGroup.new
       end
+
+      def self.all
+        @all ||= {}
+      end
+
+      def self.find_or_create(name)
+        all[name] ||= new(name)
+      end
     end
   end
 end

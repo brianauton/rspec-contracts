@@ -8,7 +8,7 @@ module RSpec
       include Mocks::TestDouble
 
       def initialize(interface_name, *args)
-        @interface = Interface.new interface_name
+        @interface = Interface.find_or_create interface_name
         __initialize_as_test_double interface_name, *args
       end
 
