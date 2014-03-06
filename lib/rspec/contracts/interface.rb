@@ -11,11 +11,11 @@ module RSpec
       end
 
       def requirements
-        Interface.requirements.interactions.select { |i| i.interface_name == name }
+        Interface.requirements.select { |i| i.interface_name == name }
       end
 
       def implementations
-        Interface.implementations.interactions.select { |i| i.interface_name == name }
+        Interface.implementations.select { |i| i.interface_name == name }
       end
 
       def add_requirement(method_name, options = {})
