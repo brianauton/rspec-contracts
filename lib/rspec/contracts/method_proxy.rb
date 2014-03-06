@@ -1,3 +1,4 @@
+require "rspec/contracts/argument_specification"
 require "rspec/contracts/interface"
 require "rspec/contracts/interaction"
 
@@ -26,7 +27,7 @@ module RSpec
         original_method = @proxied_class.instance_method @method_name
         method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
-          method_proxy.create_interface :arguments => args
+          method_proxy.create_interface :arguments => ArgumentSpecification.new(args)
           original_method.bind(self).call(*args)
         end
       end

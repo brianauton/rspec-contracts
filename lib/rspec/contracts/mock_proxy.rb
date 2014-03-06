@@ -1,6 +1,7 @@
 require "rspec/mocks"
 require "rspec/contracts/interaction"
 require "rspec/contracts/interface"
+require "rspec/contracts/return_specification"
 
 module RSpec
   module Contracts
@@ -16,7 +17,7 @@ module RSpec
       end
 
       def add_simple_stub(method_name, *args)
-        create_requirement method_name, :return_value => args.first
+        create_requirement method_name, :return_value => ReturnSpecification.new(args.first)
         super
       end
 
