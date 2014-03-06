@@ -1,4 +1,4 @@
-require "rspec/contracts/interaction"
+require "rspec/contracts/message"
 
 module RSpec
   module Contracts
@@ -12,11 +12,11 @@ module RSpec
       end
 
       def add_requirement(method_name, options = {})
-        @requirements << Interaction.new(name, method_name, options)
+        @requirements << Message.new(name, method_name, options)
       end
 
       def add_implementation(method_name, options = {})
-        @implementations << Interaction.new(name, method_name, options)
+        @implementations << Message.new(name, method_name, options)
       end
 
       def self.all

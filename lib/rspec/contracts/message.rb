@@ -1,6 +1,6 @@
 module RSpec
   module Contracts
-    class Interaction
+    class Message
       attr_reader :interface_name, :method_name, :specifications
 
       def initialize(interface_name, method_name, specifications = {})
@@ -9,12 +9,12 @@ module RSpec
         @specifications = specifications
       end
 
-      def fully_described_by?(interaction)
+      def fully_described_by?(message)
         [:interface_name, :method_name].select do |attribute|
-          return false if interaction.send(attribute) != send(attribute)
+          return false if message.send(attribute) != send(attribute)
         end
         @specifications.each do |name, specification|
-          unless specification.fully_described_by? interaction.specifications[name]
+          unless specification.fully_described_by? message.specifications[name]
             return false
           end
         end
