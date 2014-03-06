@@ -1,4 +1,4 @@
-require "rspec/contracts/argument_specification"
+require "rspec/contracts/message_arguments"
 
 module RSpec
   module Contracts
@@ -24,7 +24,7 @@ module RSpec
         original_method = @proxied_class.instance_method @method_name
         method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
-          method_proxy.create_implementation :arguments => ArgumentSpecification.new(args)
+          method_proxy.create_implementation :arguments => MessageArguments.new(args)
           original_method.bind(self).call(*args)
         end
       end

@@ -1,14 +1,14 @@
 module RSpec
   module Contracts
-    class ArgumentSpecification
+    class MessageArguments
       attr_reader :arguments
 
       def initialize(arguments)
         @arguments = arguments
       end
 
-      def fully_described_by?(specification)
-        specification && (arguments == specification.arguments)
+      def fully_described_by?(other)
+        other && (arguments == other.arguments)
       end
     end
   end
