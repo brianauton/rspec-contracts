@@ -3,6 +3,12 @@ require "rspec/contracts/interaction_group"
 module RSpec
   module Contracts
     class Interface
+      attr_reader :name
+
+      def initialize(name)
+        @name = name
+      end
+
       def self.implementations
         @implementations ||= InteractionGroup.new
       end

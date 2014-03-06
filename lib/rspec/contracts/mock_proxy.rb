@@ -6,8 +6,8 @@ require "rspec/contracts/return_specification"
 module RSpec
   module Contracts
     class MockProxy < Mocks::Proxy
-      def initialize(object, order_group, interface_name)
-        @interface_name = interface_name
+      def initialize(object, order_group, interface)
+        @interface = interface
         super(object, order_group)
       end
 
@@ -27,7 +27,7 @@ module RSpec
       end
 
       def create_requirement(method_name, options = {})
-        requirement = Interaction.new @interface_name, method_name, options
+        requirement = Interaction.new @interface.name, method_name, options
         Interface.add_requirement requirement
       end
     end

@@ -10,14 +10,14 @@ module RSpec
       end
 
       def create_interface(options)
-        implementation = Interaction.new @interface_name, @method_name, options
+        implementation = Interaction.new @interface.name, @method_name, options
         Interface.add_implementation implementation
       end
 
       private
 
-      def initialize(interface_name, proxied_class, method_name)
-        @interface_name = interface_name
+      def initialize(interface, proxied_class, method_name)
+        @interface = interface
         @proxied_class = proxied_class
         @method_name = method_name
         install
