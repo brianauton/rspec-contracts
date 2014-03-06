@@ -1,3 +1,4 @@
+require "rspec/contracts/interaction"
 require "rspec/contracts/interaction_group"
 
 module RSpec
@@ -7,6 +8,14 @@ module RSpec
 
       def initialize(name)
         @name = name
+      end
+
+      def add_requirement(method_name, options = {})
+        Interface.add_requirement Interaction.new(name, method_name, options)
+      end
+
+      def add_implementation(method_name, options = {})
+        Interface.add_implementation Interaction.new(name, method_name, options)
       end
 
       def self.implementations
