@@ -8,7 +8,7 @@ module RSpec
       end
 
       def exists?(interaction)
-        @interactions.any? { |i| i.matches? interaction }
+        @interactions.any? { |i| interaction.fully_described_by? i }
       end
 
       def add(interaction)

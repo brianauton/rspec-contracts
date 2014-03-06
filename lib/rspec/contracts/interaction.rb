@@ -10,14 +10,8 @@ module RSpec
         @return_value = options[:return_value]
       end
 
-      def matches?(interaction)
+      def fully_described_by?(interaction)
         [:interface_name, :method_name, :arguments, :return_value].select do |attribute|
-          interaction.send(attribute) != send(attribute)
-        end.empty?
-      end
-
-      def implemented_by?(interaction)
-        [:interface_name, :method_name, :arguments].select do |attribute|
           interaction.send(attribute) != send(attribute)
         end.empty?
       end

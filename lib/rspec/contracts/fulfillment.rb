@@ -16,7 +16,7 @@ module RSpec
 
       def fulfilled?(requirement)
         @implementation_group.interactions.any? do |implementation|
-          requirement.implemented_by? implementation
+          requirement.fully_described_by? implementation
         end
       end
 
