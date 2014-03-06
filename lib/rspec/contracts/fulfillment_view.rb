@@ -1,4 +1,4 @@
-require "rspec/contracts/requirement_view"
+require "rspec/contracts/interaction_view"
 
 module RSpec
   module Contracts
@@ -23,7 +23,7 @@ module RSpec
 
       def unfulfilled_views
         @fulfillment.unfulfilled_requirements.map do |requirement|
-          RSpec::Contracts::RequirementView.new(requirement).render
+          RSpec::Contracts::InteractionView.new(requirement).render
         end
       end
 
