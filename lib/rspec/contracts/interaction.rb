@@ -12,8 +12,9 @@ module RSpec
 
       def fully_described_by?(interaction)
         [:interface_name, :method_name, :arguments, :return_value].select do |attribute|
-          interaction.send(attribute) != send(attribute)
-        end.empty?
+          return false if interaction.send(attribute) != send(attribute)
+        end
+        true
       end
     end
   end
