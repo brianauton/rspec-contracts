@@ -18,8 +18,10 @@ module RSpec
       end
 
       def unfulfilled_views
-        @fulfillment.unfulfilled_requirements.map do |requirement|
-          RSpec::Contracts::MessageView.new(requirement.interface_name, requirement).render
+        @fulfillment.incomplete_interfaces.map do |fulfillment|
+          fulfillment.unfulfilled_requirements.map do |requirement|
+            RSpec::Contracts::MessageView.new(fulfillment.interface.name, requirement).render
+          end
         end
       end
 

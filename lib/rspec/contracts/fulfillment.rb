@@ -17,10 +17,6 @@ module RSpec
         interface_fulfillments.reject(&:complete?)
       end
 
-      def unfulfilled_requirements
-        interface_fulfillments.map(&:unfulfilled_requirements).flatten
-      end
-
       def requirements_count
         interface_fulfillments.map(&:requirements_count).inject(&:+) || 0
       end

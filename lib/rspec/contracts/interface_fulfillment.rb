@@ -1,6 +1,8 @@
 module RSpec
   module Contracts
     class InterfaceFulfillment
+      attr_reader :interface
+
       def initialize(interface)
         @interface = interface
       end
@@ -10,11 +12,11 @@ module RSpec
       end
 
       def unfulfilled_requirements
-        @interface.unique_requirements.reject{ |r| fulfilled? r, @interface.implementations }
+        interface.unique_requirements.reject{ |r| fulfilled? r, interface.implementations }
       end
 
       def requirements_count
-        @interface.unique_requirements.count
+        interface.unique_requirements.count
       end
 
       private
