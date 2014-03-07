@@ -1,4 +1,5 @@
 ## rspec-contracts
+[![Build Status](https://travis-ci.org/brianauton/rspec-contracts.png?branch=master)](https://travis-ci.org/brianauton/rspec-contracts)
 
 Automatic contract verification for your RSpec suite
 
