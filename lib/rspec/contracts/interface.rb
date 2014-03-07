@@ -12,11 +12,11 @@ module RSpec
       end
 
       def add_requirement(method_name, options = {})
-        @requirements << Message.new(name, method_name, options)
+        @requirements << Message.new(method_name, options)
       end
 
       def add_implementation(method_name, options = {})
-        @implementations << Message.new(name, method_name, options)
+        @implementations << Message.new(method_name, options)
       end
 
       def self.all
