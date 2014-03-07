@@ -22,7 +22,7 @@ module RSpec
       end
 
       def requirements_count
-        interface_fulfillments.map(&:requirements_count).inject(&:+)
+        interface_fulfillments.map(&:requirements_count).inject(&:+) || 0
       end
     end
   end

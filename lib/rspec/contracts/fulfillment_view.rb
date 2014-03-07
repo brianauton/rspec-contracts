@@ -12,7 +12,7 @@ module RSpec
       end
 
       def render_complete
-        "#{contracts_count} verified."
+        "#{@fulfillment.requirements_count} of #{contracts_count} verified."
       end
 
       def render_incomplete
