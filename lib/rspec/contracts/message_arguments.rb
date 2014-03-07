@@ -10,6 +10,10 @@ module RSpec
       def fully_described_by?(other)
         other && (arguments == other.arguments)
       end
+
+      def to_hash
+        {:arguments => arguments}
+      end
     end
   end
 end

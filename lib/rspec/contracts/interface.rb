@@ -26,6 +26,10 @@ module RSpec
       def self.find_or_create(name)
         all[name] ||= new(name)
       end
+
+      def unique_requirements
+        requirements.uniq(&:to_hash)
+      end
     end
   end
 end

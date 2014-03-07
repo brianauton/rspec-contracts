@@ -10,11 +10,11 @@ module RSpec
       end
 
       def unfulfilled_requirements
-        @interface.requirements.reject { |r| fulfilled? r, @interface.implementations }
+        @interface.unique_requirements.reject{ |r| fulfilled? r, @interface.implementations }
       end
 
       def requirements_count
-        @interface.requirements.count
+        @interface.unique_requirements.count
       end
 
       private

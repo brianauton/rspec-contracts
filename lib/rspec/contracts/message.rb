@@ -20,6 +20,14 @@ module RSpec
         end
         true
       end
+
+      def to_hash
+        {
+          :interface_name => interface_name,
+          :method_name => method_name,
+          :specifications => specifications.values.map(&:to_hash),
+        }
+      end
     end
   end
 end
