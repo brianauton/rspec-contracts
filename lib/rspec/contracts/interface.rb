@@ -1,5 +1,3 @@
-require "rspec/contracts/message"
-
 module RSpec
   module Contracts
     class Interface
@@ -11,12 +9,12 @@ module RSpec
         @implementations = []
       end
 
-      def add_requirement(method_name, options = {})
-        @requirements << Message.new(method_name, options)
+      def add_requirement(message)
+        @requirements << message
       end
 
-      def add_implementation(method_name, options = {})
-        @implementations << Message.new(method_name, options)
+      def add_implementation(message)
+        @implementations << message
       end
 
       def self.all
