@@ -8,17 +8,13 @@ module RSpec
       end
 
       def render
-        @fulfillment.complete? ? render_complete : render_incomplete
+        ([summary] + unfulfilled_views).join "\n"
       end
 
-      def render_complete
-        "#{@fulfillment.requirements_count} of #{contracts_count} verified."
-      end
-
-      def render_incomplete
-        lines = unfulfilled_views
-        lines.unshift("WARNING: #{unfulfilled_views.count} of #{contracts_count} unverified.")
-        lines.join "\n"
+      def summary
+        unverified = unfulfilled_views.count
+        verified = @fulfillment.requirements_count - unverified
+        "#{contracts_count}, #{verified} verified, #{unverified} unverified"
       end
 
       def unfulfilled_views
