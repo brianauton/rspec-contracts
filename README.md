@@ -1,5 +1,6 @@
 ## rspec-contracts
 [![Build Status](https://travis-ci.org/brianauton/rspec-contracts.png?branch=master)](https://travis-ci.org/brianauton/rspec-contracts)
+[![Code Climate](https://codeclimate.com/github/brianauton/rspec-contracts.png)](https://codeclimate.com/github/brianauton/rspec-contracts)
 
 Automatic contract verification for your RSpec suite
 
