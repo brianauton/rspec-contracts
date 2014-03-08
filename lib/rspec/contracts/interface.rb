@@ -1,3 +1,5 @@
+require "rspec/contracts/interface_group"
+
 module RSpec
   module Contracts
     class Interface
@@ -18,11 +20,11 @@ module RSpec
       end
 
       def self.all
-        @all ||= {}
+        @all ||= InterfaceGroup.new
       end
 
       def self.find_or_create(name)
-        all[name] ||= new(name)
+        all.find_or_create name
       end
 
       def unique_requirements

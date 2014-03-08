@@ -7,7 +7,7 @@ require "rspec/core"
 
 RSpec.configure do |c|
   c.after(:suite) do
-    fulfillment = RSpec::Contracts::Fulfillment.new RSpec::Contracts::Interface.all.values
+    fulfillment = RSpec::Contracts::Fulfillment.new RSpec::Contracts::Interface.all
     print "\n" + RSpec::Contracts::FulfillmentView.new(fulfillment).render
   end
 end
