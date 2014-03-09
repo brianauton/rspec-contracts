@@ -1,10 +1,9 @@
 module RSpec
   module Contracts
     class Implementor
-      attr_reader :subject, :interface_names, :messages
+      attr_reader :interface_names, :messages
 
-      def initialize(subject)
-        @implementor = subject
+      def initialize
         @interface_names = []
         @messages = []
       end
@@ -22,7 +21,7 @@ module RSpec
       end
 
       def self.find_or_create(subject)
-        collection[subject] ||= new(subject)
+        collection[subject] ||= new
       end
     end
   end

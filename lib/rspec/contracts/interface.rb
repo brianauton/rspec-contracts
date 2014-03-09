@@ -1,4 +1,3 @@
-require "rspec/contracts/implementor"
 require "rspec/contracts/interface_group"
 
 module RSpec
