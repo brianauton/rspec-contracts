@@ -13,20 +13,20 @@ module RSpec
 
       def summary
         unverified = unfulfilled_views.count
-        verified = @fulfillment.requirements_count - unverified
+        verified = @fulfillment.messages_count - unverified
         "#{contracts_count}, #{verified} verified, #{unverified} unverified"
       end
 
       def unfulfilled_views
         @fulfillment.incomplete_interfaces.map do |fulfillment|
-          fulfillment.unfulfilled_requirements.map do |requirement|
-            RSpec::Contracts::MessageView.new(fulfillment.interface.name, requirement).render
+          fulfillment.unfulfilled_messages.map do |message|
+            RSpec::Contracts::MessageView.new(fulfillment.interface.name, message).render
           end
         end
       end
 
       def contracts_count
-        pluralize @fulfillment.requirements_count, "contract"
+        pluralize @fulfillment.messages_count, "contract"
       end
 
       def pluralize(number, noun)

@@ -9,25 +9,25 @@ module RSpec
       end
 
       def complete?
-        unfulfilled_requirements.empty?
+        unfulfilled_messages.empty?
       end
 
-      def unfulfilled_requirements
-        interface.unique_requirements.reject{ |r| fulfilled_by_all? r }
+      def unfulfilled_messages
+        interface.unique_messages.reject{ |r| fulfilled_by_all? r }
       end
 
-      def requirements_count
-        interface.unique_requirements.count
+      def messages_count
+        interface.unique_messages.count
       end
 
       private
 
-      def fulfilled_by_all?(requirement)
-        @implementors.all?{ |i| fulfilled_by? requirement, i }
+      def fulfilled_by_all?(message)
+        @implementors.all?{ |i| fulfilled_by? message, i }
       end
 
-      def fulfilled_by?(requirement, implementor)
-        implementor.messages.any? { |message| requirement.fully_described_by? message }
+      def fulfilled_by?(message, implementor)
+        implementor.messages.any? { |m| message.fully_described_by? m }
       end
     end
   end

@@ -20,8 +20,8 @@ module RSpec
         interface_fulfillments.reject(&:complete?)
       end
 
-      def requirements_count
-        interface_fulfillments.map(&:requirements_count).inject(&:+) || 0
+      def messages_count
+        interface_fulfillments.map(&:messages_count).inject(&:+) || 0
       end
 
       def implementors_for(interface)

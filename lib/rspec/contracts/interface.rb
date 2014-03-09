@@ -4,23 +4,15 @@ require "rspec/contracts/interface_group"
 module RSpec
   module Contracts
     class Interface
-      attr_reader :name, :requirements
+      attr_reader :name, :messages
 
       def initialize(name)
         @name = name
-        @requirements = []
+        @messages = []
       end
 
-      def add_requirement(message)
-        @requirements << message
-      end
-
-      def implementors
-        Implementor.all.select{ |i| i.interface_names.include? name }
-      end
-
-      def implementations
-        implementors.map(&:messages).flatten
+      def add_message(message)
+        @messages << message
       end
 
       def self.all
@@ -31,8 +23,8 @@ module RSpec
         all.find_or_create name
       end
 
-      def unique_requirements
-        requirements.uniq(&:to_hash)
+      def unique_messages
+        messages.uniq(&:to_hash)
       end
     end
   end
