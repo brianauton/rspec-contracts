@@ -5,8 +5,11 @@ module RSpec
     class Fulfillment
       attr_reader :interface_fulfillments
 
-      def initialize(interfaces)
-        @interface_fulfillments = interfaces.map{ |i| InterfaceFulfillment.new i }
+      def initialize(interfaces, implementors)
+        @implementors = implementors
+        @interface_fulfillments = interfaces.map do |interface|
+          InterfaceFulfillment.new interface, implementors_for(interface)
+        end
       end
 
       def complete?
@@ -19,6 +22,10 @@ module RSpec
 
       def requirements_count
         interface_fulfillments.map(&:requirements_count).inject(&:+) || 0
+      end
+
+      def implementors_for(interface)
+        @implementors.select{ |i| i.interface_names.include? interface.name }
       end
     end
   end

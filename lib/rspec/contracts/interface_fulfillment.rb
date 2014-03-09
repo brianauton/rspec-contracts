@@ -3,8 +3,9 @@ module RSpec
     class InterfaceFulfillment
       attr_reader :interface
 
-      def initialize(interface)
+      def initialize(interface, implementors)
         @interface = interface
+        @implementors = implementors
       end
 
       def complete?
@@ -12,7 +13,7 @@ module RSpec
       end
 
       def unfulfilled_requirements
-        interface.unique_requirements.reject{ |r| fulfilled? r, interface.implementations }
+        interface.unique_requirements.reject{ |r| fulfilled_by_all? r }
       end
 
       def requirements_count
@@ -21,8 +22,12 @@ module RSpec
 
       private
 
-      def fulfilled?(requirement, implementations)
-        implementations.any? { |i| requirement.fully_described_by? i }
+      def fulfilled_by_all?(requirement)
+        @implementors.all?{ |i| fulfilled_by? requirement, i }
+      end
+
+      def fulfilled_by?(requirement, implementor)
+        implementor.messages.any? { |message| requirement.fully_described_by? message }
       end
     end
   end
