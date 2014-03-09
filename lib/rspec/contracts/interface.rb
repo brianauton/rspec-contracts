@@ -1,22 +1,26 @@
+require "rspec/contracts/implementor"
 require "rspec/contracts/interface_group"
 
 module RSpec
   module Contracts
     class Interface
-      attr_reader :name, :requirements, :implementations
+      attr_reader :name, :requirements
 
       def initialize(name)
         @name = name
         @requirements = []
-        @implementations = []
       end
 
       def add_requirement(message)
         @requirements << message
       end
 
-      def add_implementation(message)
-        @implementations << message
+      def implementors
+        Implementor.all.select{ |i| i.interface_names.include? name }
+      end
+
+      def implementations
+        implementors.map(&:messages).flatten
       end
 
       def self.all
