@@ -1,7 +1,8 @@
 module RSpec
   module Contracts
     class Message
-      attr_reader :method_name, :specifications
+      attr_reader :method_name
+      attr_accessor :specifications
 
       def initialize(method_name, specifications = {})
         @method_name = method_name

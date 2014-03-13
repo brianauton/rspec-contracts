@@ -9,7 +9,7 @@ module RSpec
 
       def initialize(interface_name, *args)
         @interface = Interface.find_or_create interface_name
-        __initialize_as_test_double interface_name, *args
+        super
       end
 
       def __build_mock_proxy(order_group)

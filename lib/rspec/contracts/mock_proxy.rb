@@ -6,27 +6,23 @@ module RSpec
   module Contracts
     class MockProxy < Mocks::Proxy
       def initialize(object, order_group, interface)
-        @interface = interface
         super(object, order_group)
+        @method_doubles = Hash.new do |h, k|
+          h[k] = ContractMethodDouble.new(interface, object, k, self)
+        end
+      end
+    end
+
+    class ContractMethodDouble < Mocks::MethodDouble
+      def initialize(interface, object, method_name, proxy)
+        @message = Message.new method_name
+        interface.add_message @message
+        super(object, method_name, proxy)
       end
 
-      def add_stub(location, method_name, opts={}, &implementation)
-        add_message method_name
+      def add_simple_stub(method_name, return_value)
+        @message.specifications[:return_value] = MessageReturn.new(return_value)
         super
-      end
-
-      def add_simple_stub(method_name, *args)
-        add_message method_name, :return_value => MessageReturn.new(args.first)
-        super
-      end
-
-      def add_message_expectation(location, method_name, opts={}, &block)
-        add_message method_name
-        super
-      end
-
-      def add_message(method_name, options = {})
-        @interface.add_message Message.new(method_name, options)
       end
     end
   end
