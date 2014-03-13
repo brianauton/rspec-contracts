@@ -14,6 +14,8 @@ module RSpec
     end
 
     class ContractMethodDouble < Mocks::MethodDouble
+      attr_reader :message
+
       def initialize(interface, object, method_name, proxy)
         @message = Message.new method_name
         interface.add_message @message
@@ -22,6 +24,21 @@ module RSpec
 
       def add_simple_stub(method_name, return_value)
         @message.specifications[:return_value] = MessageReturn.new(return_value)
+        super
+      end
+
+      def message_expectation_class
+        ContractMessageExpectation
+      end
+    end
+
+    class ContractMessageExpectation < Mocks::MessageExpectation
+      def contract_message
+        @method_double.message
+      end
+
+      def with(*args)
+        contract_message.specifications[:arguments] = MessageArguments.new(args)
         super
       end
     end
