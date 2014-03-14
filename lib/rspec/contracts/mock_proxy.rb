@@ -41,6 +41,11 @@ module RSpec
         contract_message.specifications[:arguments] = MessageArguments.new(args)
         super
       end
+
+      def and_return(*args)
+        contract_message.specifications[:return_value] = MessageReturn.new(args.first)
+        super
+      end
     end
   end
 end
