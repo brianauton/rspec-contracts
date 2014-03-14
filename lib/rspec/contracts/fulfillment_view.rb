@@ -22,7 +22,7 @@ module RSpec
           fulfillment.unfulfilled_messages.map do |message|
             RSpec::Contracts::MessageView.new(fulfillment.interface.name, message).render
           end
-        end
+        end.flatten
       end
 
       def contracts_count
