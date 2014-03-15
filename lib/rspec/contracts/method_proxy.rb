@@ -9,7 +9,9 @@ module RSpec
       end
 
       def add_message(options)
-        @implementor.add_message Message.new(@method_name, options)
+        message = Message.new(@method_name, options)
+        @implementor.add_message message
+        message
       end
 
       private
@@ -25,8 +27,10 @@ module RSpec
         original_method = @proxied_class.instance_method @method_name
         method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
-          method_proxy.add_message :arguments => MessageArguments.new(args)
-          original_method.bind(self).call(*args)
+          message = method_proxy.add_message :arguments => MessageArguments.new(args)
+          return_value = original_method.bind(self).call(*args)
+          message.specifications[:return_value] = MessageReturn.new(return_value)
+          return_value
         end
       end
     end

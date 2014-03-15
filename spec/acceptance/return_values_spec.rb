@@ -2,6 +2,9 @@ describe "rspec-contracts with return values" do
   before do
     spec_data <<-END
       class Widget; end
+      class Server
+        def foo; 2; end
+      end
     END
   end
 
@@ -34,4 +37,19 @@ describe "rspec-contracts with return values" do
     END
     expect(spec_result).to have(1).contract
   end
+
+  it "observes return values to fulfill contracts" do
+    spec_data <<-END
+      describe Widget do
+        it { expect(contract_double :server).to receive(:foo).and_return(2) }
+        it { expect(contract_double :server).to receive(:foo).and_return(3) }
+      end
+      describe Server do
+        fulfill_contract :server
+        it { Server.new.foo }
+      end
+    END
+    expect(spec_result).to have(1).verified_contract
+  end
+
 end
