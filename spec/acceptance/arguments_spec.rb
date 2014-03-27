@@ -5,6 +5,7 @@ describe "rspec-contracts with method arguments" do
       class Server
         def foo; end
       end
+      SpecializedServer = Class.new(Server)
     END
   end
 
@@ -45,5 +46,21 @@ describe "rspec-contracts with method arguments" do
       end
     END
     expect(spec_result).to have(1).verified_contract
+  end
+
+  it "requires all implementors of an interface to accept the arguments" do
+    spec_data <<-END
+      describe Widget do
+        it { expect(contract_double :server).to receive(:foo).with(1) }
+      end
+      describe Server do
+        fulfill_contract :server
+        it { Server.new.foo(1) }
+      end
+      describe SpecializedServer do
+        fulfill_contract :server
+      end
+    END
+    expect(spec_result).to have(0).verified_contracts
   end
 end
