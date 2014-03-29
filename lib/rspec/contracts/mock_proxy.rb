@@ -38,7 +38,7 @@ module RSpec
       end
 
       def with(*args)
-        contract_message.specifications[:arguments] = MessageArguments.new(args)
+        contract_message.arguments = args
         super
       end
 

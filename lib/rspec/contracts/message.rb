@@ -2,7 +2,7 @@ module RSpec
   module Contracts
     class Message
       attr_reader :name
-      attr_accessor :specifications
+      attr_accessor :arguments, :specifications
 
       def initialize(name, specifications = {})
         @name = name
@@ -10,11 +10,15 @@ module RSpec
       end
 
       def described_by?(message)
-        name_described_by?(message) && specifications_described_by?(message)
+        [:name, :arguments, :specifications].all? { |n| send "#{n}_described_by?", message }
       end
 
       def name_described_by?(message)
         message.name == name
+      end
+
+      def arguments_described_by?(message)
+        arguments.nil? || arguments == message.arguments
       end
 
       def specifications_described_by?(message)
@@ -26,6 +30,7 @@ module RSpec
       def to_hash
         {
           :name => name,
+          :arguments => arguments,
           :specifications => specifications.values.map(&:to_hash),
         }
       end
