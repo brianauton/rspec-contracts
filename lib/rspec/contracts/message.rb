@@ -10,13 +10,17 @@ module RSpec
       end
 
       def described_by?(message)
-        return false if message.name != name
-        @specifications.each do |name, specification|
-          unless specification.described_by? message.specifications[name]
-            return false
-          end
+        name_described_by?(message) && specifications_described_by?(message)
+      end
+
+      def name_described_by?(message)
+        message.name == name
+      end
+
+      def specifications_described_by?(message)
+        @specifications.all? do |name, specification|
+          specification.described_by? message.specifications[name]
         end
-        true
       end
 
       def to_hash
