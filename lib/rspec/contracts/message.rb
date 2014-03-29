@@ -1,16 +1,16 @@
 module RSpec
   module Contracts
     class Message
-      attr_reader :method_name
+      attr_reader :name
       attr_accessor :specifications
 
-      def initialize(method_name, specifications = {})
-        @method_name = method_name
+      def initialize(name, specifications = {})
+        @name = name
         @specifications = specifications
       end
 
       def described_by?(message)
-        return false if message.method_name != method_name
+        return false if message.name != name
         @specifications.each do |name, specification|
           unless specification.described_by? message.specifications[name]
             return false
@@ -21,7 +21,7 @@ module RSpec
 
       def to_hash
         {
-          :method_name => method_name,
+          :name => name,
           :specifications => specifications.values.map(&:to_hash),
         }
       end

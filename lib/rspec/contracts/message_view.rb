@@ -9,7 +9,7 @@ module RSpec
       def render
         arg_string = @message.specifications[:arguments] ? "()" : ""
         return_string = @message.specifications[:return_value] ? "and return #{@message.specifications[:return_value].value.inspect}" : ""
-        "Interface '#{@interface_name}' must respond to '#{@message.method_name}#{arg_string}' #{return_string}"
+        "Interface '#{@interface_name}' must respond to '#{@message.name}#{arg_string}' #{return_string}"
       end
     end
   end
