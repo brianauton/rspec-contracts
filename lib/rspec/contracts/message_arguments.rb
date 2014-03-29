@@ -7,7 +7,7 @@ module RSpec
         @arguments = arguments
       end
 
-      def fully_described_by?(other)
+      def described_by?(other)
         other && (arguments == other.arguments)
       end
 

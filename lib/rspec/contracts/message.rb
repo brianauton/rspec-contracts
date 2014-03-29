@@ -9,10 +9,10 @@ module RSpec
         @specifications = specifications
       end
 
-      def fully_described_by?(message)
+      def described_by?(message)
         return false if message.method_name != method_name
         @specifications.each do |name, specification|
-          unless specification.fully_described_by? message.specifications[name]
+          unless specification.described_by? message.specifications[name]
             return false
           end
         end

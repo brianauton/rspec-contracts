@@ -27,7 +27,7 @@ module RSpec
       end
 
       def fulfilled_by?(message, implementor)
-        implementor.messages.any? { |m| message.fully_described_by? m }
+        implementor.messages.any? { |m| message.described_by? m }
       end
     end
   end

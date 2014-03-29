@@ -7,7 +7,7 @@ module RSpec
         @value = value
       end
 
-      def fully_described_by?(other)
+      def described_by?(other)
         other && (value == other.value)
       end
 
