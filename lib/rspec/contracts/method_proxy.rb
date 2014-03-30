@@ -1,4 +1,4 @@
-require "rspec/contracts/message"
+require "rspec/contracts/message_group"
 require "rspec/contracts/returned_response"
 
 module RSpec
@@ -9,10 +9,7 @@ module RSpec
       end
 
       def add_message(arguments)
-        message = Message.new @method_name
-        message.arguments = arguments
-        @implementor.add_message message
-        message
+        MessageGroup.new @implementor, @method_name, arguments
       end
 
       private
@@ -28,9 +25,9 @@ module RSpec
         original_method = @proxied_class.instance_method @method_name
         method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
-          message = method_proxy.add_message args
+          message_group = method_proxy.add_message args
           return_value = original_method.bind(self).call(*args)
-          message.response = ReturnedResponse.new(return_value)
+          message_group.add_response ReturnedResponse.new(return_value)
           return_value
         end
       end
