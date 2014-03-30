@@ -3,7 +3,7 @@ describe "rspec-contracts with return values" do
     spec_data <<-END
       class Widget; end
       class Server
-        def foo; yield 2; end
+        def foo; yield 2, 3; end
       end
       class OtherServer
         def foo; end
@@ -24,8 +24,8 @@ describe "rspec-contracts with return values" do
   it "considers multiple yield values in a sequence to be separate contracts" do
     spec_data <<-END
       describe Widget do
-        it { expect(contract_double :server).to receive(:foo).and_yield(1, 2) }
-        it { expect(contract_double :server).to receive(:foo).and_yield(1, 4) }
+        it { expect(contract_double :server).to receive(:foo).and_yield(1).and_yield(2) }
+        it { expect(contract_double :server).to receive(:foo).and_yield(1).and_yield(3) }
       end
     END
     expect(spec_result).to have(3).contracts
@@ -34,8 +34,8 @@ describe "rspec-contracts with return values" do
   it "observes yielded values to fulfill contracts" do
     spec_data <<-END
       describe Widget do
+        it { expect(contract_double :server).to receive(:foo).and_yield(2, 3) }
         it { expect(contract_double :server).to receive(:foo).and_yield(2) }
-        it { expect(contract_double :server).to receive(:foo).and_yield(3) }
       end
       describe Server do
         fulfill_contract :server
@@ -48,7 +48,7 @@ describe "rspec-contracts with return values" do
   it "requires only one implementor of an interface to support the yielded value" do
     spec_data <<-END
       describe Widget do
-        it { expect(contract_double :server).to receive(:foo).and_yield(2) }
+        it { expect(contract_double :server).to receive(:foo).and_yield(2, 3) }
       end
       describe Server do
         fulfill_contract :server

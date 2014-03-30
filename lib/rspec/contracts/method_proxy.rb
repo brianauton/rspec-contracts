@@ -27,8 +27,8 @@ module RSpec
         method_proxy = self
         @proxied_class.send :define_method, @method_name do |*args|
           message_group = method_proxy.add_message args
-          return_value = original_method.bind(self).call(*args) do |value|
-            message_group.add_response YieldedResponse.new(value)
+          return_value = original_method.bind(self).call(*args) do |*values|
+            message_group.add_response YieldedResponse.new(*values)
           end
           message_group.add_response ReturnedResponse.new(return_value)
           return_value

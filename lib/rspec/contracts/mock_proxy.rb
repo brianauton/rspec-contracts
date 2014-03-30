@@ -52,7 +52,7 @@ module RSpec
       end
 
       def and_yield(*args)
-        args.each { |value| @method_double.add_response YieldedResponse.new(value) }
+        @method_double.add_response YieldedResponse.new(*args)
         super
       end
     end
