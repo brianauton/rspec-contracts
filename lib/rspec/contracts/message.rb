@@ -1,3 +1,5 @@
+require "rspec/contracts/unspecified_response"
+
 module RSpec
   module Contracts
     class Message
@@ -6,6 +8,7 @@ module RSpec
 
       def initialize(name)
         @name = name
+        @response = UnspecifiedResponse.new
       end
 
       def described_by?(message)
@@ -21,14 +24,14 @@ module RSpec
       end
 
       def response_described_by?(message)
-        !response || response.described_by?(message.response)
+        response.described_by? message.response
       end
 
       def to_hash
         {
           :name => name,
           :arguments => arguments,
-          :response => (response && response.to_hash),
+          :response => response.to_hash,
         }
       end
     end
