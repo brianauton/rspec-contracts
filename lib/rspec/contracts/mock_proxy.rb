@@ -22,8 +22,16 @@ module RSpec
         super(object, method_name, proxy)
       end
 
+      def set_arguments(arguments)
+        @message.arguments = arguments
+      end
+
+      def add_response(response)
+        @message.response = response
+      end
+
       def add_simple_stub(method_name, return_value)
-        @message.response = ReturnedResponse.new(return_value)
+        add_response ReturnedResponse.new(return_value)
         super
       end
 
@@ -33,17 +41,13 @@ module RSpec
     end
 
     class ContractMessageExpectation < Mocks::MessageExpectation
-      def contract_message
-        @method_double.message
-      end
-
       def with(*args)
-        contract_message.arguments = args
+        @method_double.set_arguments args
         super
       end
 
       def and_return(*args)
-        contract_message.response = ReturnedResponse.new(args.first)
+        @method_double.add_response ReturnedResponse.new(args.first)
         super
       end
     end
