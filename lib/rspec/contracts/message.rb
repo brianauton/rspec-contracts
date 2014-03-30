@@ -4,9 +4,9 @@ module RSpec
       attr_reader :name
       attr_accessor :arguments, :specifications
 
-      def initialize(name, specifications = {})
+      def initialize(name)
         @name = name
-        @specifications = specifications
+        @specifications = {}
       end
 
       def described_by?(message)

@@ -1,6 +1,6 @@
 module RSpec
   module Contracts
-    class MessageReturn
+    class ReturnedResponse
       attr_reader :value
 
       def initialize(value)

@@ -5,6 +5,9 @@ describe "rspec-contracts with return values" do
       class Server
         def foo; 2; end
       end
+      class OtherServer
+        def foo; 4; end
+      end
     END
   end
 
@@ -52,4 +55,19 @@ describe "rspec-contracts with return values" do
     expect(spec_result).to have(1).verified_contract
   end
 
+  it "requires only one implementor of an interface to support the return value" do
+    spec_data <<-END
+      describe Widget do
+        it { expect(contract_double :server).to receive(:foo).and_return(2) }
+      end
+      describe Server do
+        fulfill_contract :server
+        it { Server.new.foo }
+      end
+      describe OtherServer do
+        fulfill_contract :server
+      end
+    END
+#    expect(spec_result).to have(1).verified_contract
+  end
 end
