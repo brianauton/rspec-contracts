@@ -30,7 +30,7 @@ module RSpec
         @proxied_class.send :define_method, @method_name do |*args|
           message = method_proxy.add_message args
           return_value = original_method.bind(self).call(*args)
-          message.specifications[:return_value] = ReturnedResponse.new(return_value)
+          message.response = ReturnedResponse.new(return_value)
           return_value
         end
       end

@@ -23,7 +23,7 @@ module RSpec
       end
 
       def add_simple_stub(method_name, return_value)
-        @message.specifications[:return_value] = ReturnedResponse.new(return_value)
+        @message.response = ReturnedResponse.new(return_value)
         super
       end
 
@@ -43,7 +43,7 @@ module RSpec
       end
 
       def and_return(*args)
-        contract_message.specifications[:return_value] = ReturnedResponse.new(args.first)
+        contract_message.response = ReturnedResponse.new(args.first)
         super
       end
     end
