@@ -1,6 +1,7 @@
 require "rspec/mocks"
 require "rspec/contracts/message"
 require "rspec/contracts/returned_response"
+require "rspec/contracts/yielded_response"
 
 module RSpec
   module Contracts
@@ -55,6 +56,11 @@ module RSpec
 
       def and_return(*args)
         args.each { |value| @method_double.add_response ReturnedResponse.new(value) }
+        super
+      end
+
+      def and_yield(*args)
+        args.each { |value| @method_double.add_response YieldedResponse.new(value) }
         super
       end
     end
