@@ -66,8 +66,9 @@ describe "rspec-contracts with return values" do
       end
       describe OtherServer do
         fulfill_contract :server
+        it { OtherServer.new.foo }
       end
     END
-#    expect(spec_result).to have(1).verified_contract
+    expect(spec_result).to have(1).verified_contract
   end
 end

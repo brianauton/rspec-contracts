@@ -6,8 +6,9 @@ module RSpec
       attr_reader :name
       attr_accessor :arguments, :response
 
-      def initialize(name)
+      def initialize(name, arguments = nil)
         @name = name
+        @arguments = arguments
         @response = UnspecifiedResponse.new
       end
 
@@ -25,6 +26,10 @@ module RSpec
 
       def response_described_by?(message)
         response.described_by? message.response
+      end
+
+      def without_response
+        self.class.new name, arguments
       end
 
       def to_hash
