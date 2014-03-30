@@ -31,14 +31,14 @@ describe "rspec-contracts with return values" do
     expect(spec_result).to have(2).contracts
   end
 
-  it "disregards all but the first return value in a sequence (for now)" do
+  it "considers multiple return values in a sequence to be separate contracts" do
     spec_data <<-END
       describe Widget do
         it { expect(contract_double :server).to receive(:foo).and_return(1, 2) }
         it { expect(contract_double :server).to receive(:foo).and_return(1, 4) }
       end
     END
-    expect(spec_result).to have(1).contract
+    expect(spec_result).to have(3).contracts
   end
 
   it "observes return values to fulfill contracts" do

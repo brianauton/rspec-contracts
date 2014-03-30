@@ -17,9 +17,14 @@ module RSpec
       attr_reader :message
 
       def initialize(interface, object, method_name, proxy)
-        @message = Message.new method_name
-        interface.add_message @message
+        @interface = interface
+        add_message Message.new(method_name)
         super(object, method_name, proxy)
+      end
+
+      def add_message(message)
+        @message = message
+        @interface.add_message @message
       end
 
       def set_arguments(arguments)
@@ -27,7 +32,9 @@ module RSpec
       end
 
       def add_response(response)
+        add_message @message.without_response if @multiple_responses
         @message.response = response
+        @multiple_responses = true
       end
 
       def add_simple_stub(method_name, return_value)
@@ -47,7 +54,7 @@ module RSpec
       end
 
       def and_return(*args)
-        @method_double.add_response ReturnedResponse.new(args.first)
+        args.each { |value| @method_double.add_response ReturnedResponse.new(value) }
         super
       end
     end
