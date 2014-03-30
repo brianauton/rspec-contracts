@@ -1,5 +1,5 @@
 require "rspec/mocks"
-require "rspec/contracts/message"
+require "rspec/contracts/message_group"
 require "rspec/contracts/returned_response"
 require "rspec/contracts/yielded_response"
 
@@ -18,24 +18,16 @@ module RSpec
       attr_reader :message
 
       def initialize(interface, object, method_name, proxy)
-        @interface = interface
-        add_message Message.new(method_name)
+        @message_group = MessageGroup.new(interface, method_name)
         super(object, method_name, proxy)
       end
 
-      def add_message(message)
-        @message = message
-        @interface.add_message @message
-      end
-
       def set_arguments(arguments)
-        @message.arguments = arguments
+        @message_group.set_arguments arguments
       end
 
       def add_response(response)
-        add_message @message.without_response if @multiple_responses
-        @message.response = response
-        @multiple_responses = true
+        @message_group.add_response response
       end
 
       def add_simple_stub(method_name, return_value)
